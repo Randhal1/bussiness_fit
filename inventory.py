@@ -1,5 +1,9 @@
+from main_features.start_module import run
+run()
+
 import tkinter as tk
-from tkinter import ttk
+from main_features.GUI_elements.tables import Table
+from tkinter import messagebox
 from main_features.frames import Frame
 from main_features.dbconections import DB_conection
 from main_features.GUI_elements.buttons import button
@@ -20,21 +24,14 @@ def products():
 
     # The list with the products
     headers_product = ['Código', 'Descripción', 'Costo', 'Precio', 'Cantidad']
-    inventory_list = ttk.Treeview(frame, height = 15,
-                                     columns = headers_product, show = 'headings')
-    inventory_list.config(cursor = 'hand2')
-    inventory_list.grid(row = 7, column = 0, columnspan = 4, 
-                                            pady = 5, padx = 10, sticky = 'nse')
+    inventory_list = Table(frame, headers_product)
 
-    # Assign scrollbar 
-    scroll = ttk.Scrollbar(frame, orient = 'vertical', command = inventory_list.yview)
-    scroll.grid(row = 7, column = 3, padx = 5, sticky = 'nse')
-    inventory_list.configure(yscrollcommand = scroll.set)
-    
-    #### Set the heading
-    for header in headers_product:
-        inventory_list.heading(header, text = header)
-    
+    inventory_list.column(headers_product[0], width = 200)
+    inventory_list.column(headers_product[1], width = 500)
+    inventory_list.column(headers_product[2], width = 100, anchor = tk.E)
+    inventory_list.column(headers_product[3], width = 100, anchor = tk.E)
+    inventory_list.column(headers_product[4], width = 100, anchor = tk.E)
+
     data.get_products(inventory_list)
 
     # Buttons section for product and define buttons operations
@@ -63,33 +60,115 @@ def products():
     def create_new_product(): # Also add new line
         
         labels_state(True)
-        test_code  = len(code.value.get()) > 1 
-        test_desc  = len(description.value.get()) > 1
+        test_code  = len(code.value.get()) > 0
+        test_desc  = len(description.value.get()) > 0
                 
         if test_code and test_desc:
             data.add_product(
                             str(code.value.get()), 
                             str(description.value.get()), 
-                            float(cost.value.get()), 
-                            float(price.value.get()), 
-                            float(quantity.value.get())
+                            "{:.4f}".format(float(eval(cost.value.get()))), 
+                            "{:.4f}".format(float(eval(price.value.get()))), 
+                            "{:.4f}".format(float(eval(quantity.value.get())))
                             )
+
+        data.get_products(inventory_list)
+        clean()
+
+    def update_product():
+        
+        labels_state(True)
+        test_code  = len(code.value.get()) > 0
+        test_desc  = len(description.value.get()) > 0
+                
+        if test_code and test_desc:
+            data.edit_product(
+                            str(code.value.get()), 
+                            str(description.value.get()), 
+                            "{:.4f}".format(float(eval(cost.value.get()))), 
+                            "{:.4f}".format(float(eval(price.value.get()))), 
+                            "{:.4f}".format(float(eval(quantity.value.get())))
+                            )
+
         data.get_products(inventory_list)
         clean()
 
     def cancel_operation():
         labels_state(False)
+        save_button.config(command = create_new_product)
+        save_button['text'] = 'Crear'
+        save_button.button_color('green_button')
+
+        cancel_button['text'] = 'Cancelar'
+        cancel_button.button_color('red_button')
+
         clean()
+
+    def edit_item():
+        try:
+            labels_state(True)
+            
+            save_button['text'] = 'Actualizar'
+            save_button.button_color('orange_button')
+            save_button.config(command = update_product)
+
+            cancel_button['text'] = 'Finalizar edicion'
+            cancel_button.button_color('purple_button')
+
+            code.value.set(
+                inventory_list.item(inventory_list.selection())['values'][0])
+            description.value.set(
+                inventory_list.item(inventory_list.selection())['values'][1])
+            cost.value.set(
+                inventory_list.item(inventory_list.selection())['values'][2])
+            price.value.set(
+                inventory_list.item(inventory_list.selection())['values'][3])
+            quantity.value.set(
+                inventory_list.item(inventory_list.selection())['values'][4])
+        
+        except:
+            messagebox.showwarning('Error de selección', 
+                    'Por favor seleccione un registro y luego presione el boton editar.')
+            messagebox.showwarning('Modo edicion activado', 
+                    "Para crear nuevos registros presione el botón 'Finalizar edición'.")
+
+    def delete_item():
+
+        try:
+            code.value.set(
+                inventory_list.item(inventory_list.selection())['values'][0])
+            description.value.set(
+                inventory_list.item(inventory_list.selection())['values'][1])
+            cost.value.set(
+                inventory_list.item(inventory_list.selection())['values'][2])
+            price.value.set(
+                inventory_list.item(inventory_list.selection())['values'][3])
+            quantity.value.set(
+                inventory_list.item(inventory_list.selection())['values'][4])
+
+            element      = inventory_list.item(inventory_list.selection())['values'][0]
+            element_desc = inventory_list.item(inventory_list.selection())['values'][1] 
+            
+            data.delete_product(element) 
+            data.get_products(inventory_list)    
+            clean() 
+
+            messagebox.showwarning('Alerta de borrado.', 
+                f'El producto {element} "{element_desc}" ha sido borrado de la lista.')
+
+        except tk._tkinter.TclError:
+            messagebox.showwarning('Alerta de borrado.', 
+                f'Solo se permite borrar un elemento a la vez.')
+            
 
     # Buttons
     save_button   = button(frame, 'Crear', create_new_product, 'green_button', (6, 2))
     cancel_button = button(frame, 'Cancelar', cancel_operation, 'red_button', (6, 3))
-    edit_button   = button(frame, 'Editar', 0, 'blue_button', (8,0))
-    delete_button = button(frame, 'Eliminar', 0, 'black_button', (8,1))
+    edit_button   = button(frame, 'Editar', edit_item, 'blue_button', (8,0))
+    delete_button = button(frame, 'Eliminar', delete_item, 'black_button', (8,1))
     
     cancel_operation()
     root.mainloop()
-
 
 if __name__ == '__main__':
     products()

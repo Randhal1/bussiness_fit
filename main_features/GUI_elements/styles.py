@@ -20,6 +20,16 @@ colors = {
         'background': '#1D252D',
         'foreground': '#ffffff',
         'active_bg' : '#74D1EA'
+    },
+    'orange_button': {
+        'background': '#FF5733',
+        'foreground': '#FDE9E4',
+        'active_bg' : '#BE2200'
+    },
+    'purple_button': {
+        'background': '#4A0084',
+        'foreground': '#E2E2E2',
+        'active_bg' : '#B454FF'
     }
 }
 

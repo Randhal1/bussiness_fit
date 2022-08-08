@@ -17,5 +17,10 @@ class button(tk.Button):
         # Set location
         self.grid(row = location[0], column = location[1], pady = 10)
 
+    def button_color(self, changed):
+        self.color = color(changed)
+        self.config(fg = self.color['foreground'], bg = self.color['background'], 
+                    activebackground = self.color['active_bg'])
+
 if __name__ == '__main__':
     pass

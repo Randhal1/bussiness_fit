@@ -1,3 +1,6 @@
+from start_module import run
+run()
+
 import tkinter as tk
 from main_features.GUI_elements.selection_menu import selection_menu
 
@@ -5,6 +8,11 @@ class Frame(tk.Frame):
     def __init__(self, root):
         super().__init__(root, width = 800, height = 600)
         self.root = root
+
+        # Define window title and icon 
+        self.root.title('Inventory: Software punto de ventas')
+        self.root.iconbitmap('branx_sources/main_ico.ico')
+        
         self.menus()
         self.pack()
         
