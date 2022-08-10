@@ -23,7 +23,6 @@ def people():
     direction   = collector(frame, 'Dirección :', 5, displace = -1)
     email       = collector(frame, 'Correo electrónico :', 6, displace = -1)
 
-    # The list with the products
     headers_product = ['Código', 'Nombre', 'Telefono', 'Deuda', 'Dirección', 'e-mail']
     people_list = Table(frame, headers_product, 10, 9, 8, 'green_table', rows_qty = 10)
 
@@ -36,7 +35,6 @@ def people():
 
     data.get_people(people_list)
 
-    # Buttons section for product and define buttons operations
     def clean():
         code.value.set('')
         name.value.set('')
@@ -163,7 +161,7 @@ def people():
             clean() 
 
             messagebox.showwarning('Alerta de borrado.', 
-                f'El producto {customer} "{customer_name}" ha sido borrado de la lista.')
+                f'El cliente {customer} "{customer_name}" ha sido borrado de la lista.')
 
         except tk._tkinter.TclError:
             messagebox.showwarning('Alerta de borrado.', 
