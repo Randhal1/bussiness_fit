@@ -5,14 +5,14 @@ import tkinter as tk
 from main_features.GUI_elements.tables import Table
 from tkinter import messagebox
 from main_features.frames import Frame
-from main_features.dbconections import DB_conection
+from main_features.products_connections import products_connection
 from main_features.GUI_elements.buttons import button
 from main_features.GUI_elements.labels_entries import collector
 
 def products():
     # Create frame
     root = tk.Tk()
-    data = DB_conection()
+    data = products_connection()
     frame = Frame(root)
     
     ## Input labels
@@ -24,7 +24,7 @@ def products():
 
     # The list with the products
     headers_product = ['Código', 'Descripción', 'Costo', 'Precio', 'Cantidad']
-    inventory_list = Table(frame, headers_product)
+    inventory_list = Table(frame, headers_product, 7, 4, 3, 'blue_table')
 
     inventory_list.column(headers_product[0], width = 200)
     inventory_list.column(headers_product[1], width = 500)
@@ -67,9 +67,9 @@ def products():
             data.add_product(
                             str(code.value.get()), 
                             str(description.value.get()), 
-                            "{:.4f}".format(float(eval(cost.value.get()))), 
-                            "{:.4f}".format(float(eval(price.value.get()))), 
-                            "{:.4f}".format(float(eval(quantity.value.get())))
+                            float(eval(cost.value.get())), 
+                            float(eval(price.value.get())), 
+                            float(eval(quantity.value.get()))
                             )
 
         data.get_products(inventory_list)
@@ -85,9 +85,9 @@ def products():
             data.edit_product(
                             str(code.value.get()), 
                             str(description.value.get()), 
-                            "{:.4f}".format(float(eval(cost.value.get()))), 
-                            "{:.4f}".format(float(eval(price.value.get()))), 
-                            "{:.4f}".format(float(eval(quantity.value.get())))
+                            float(eval(cost.value.get())), 
+                            float(eval(price.value.get())), 
+                            float(eval(quantity.value.get()))
                             )
 
         data.get_products(inventory_list)

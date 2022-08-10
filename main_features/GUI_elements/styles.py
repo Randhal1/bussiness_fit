@@ -1,6 +1,9 @@
 # Define ibject color
 
 colors = {
+
+    # Buttons colors
+
     'green_button': {
         'background': '#008b45',
         'foreground': '#f0f8ff',
@@ -30,6 +33,21 @@ colors = {
         'background': '#4A0084',
         'foreground': '#E2E2E2',
         'active_bg' : '#B454FF'
+    },
+
+    # Tables colors
+
+    'blue_table': {
+        'odd' : '#fffcfc',
+        'even': '#ebf6ff'
+    },
+    'red_table': {
+        'odd' : '#FFB5B5',
+        'even': '#FFF4F4'
+    },
+    'green_table': {
+        'odd' : '#A4FFC2',
+        'even': '#EFFFF4'
     }
 }
 
