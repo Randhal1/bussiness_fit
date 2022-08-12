@@ -1,32 +1,41 @@
 import mysql.connector as sql
-import tkinter as tk
 from tkinter import messagebox
 
 class DB_conection:
     def __init__(self,
-                table,
+                table = 'inventario_de_productos',
                 dbname = 'comercial_las_auyamas',
-                host   = 'localhost',
-                user   = 'comercial_auyama_boss',
-                passwd = '8498731104+1'):
+                host   = 'localhost'):
         self.dbname = dbname
         self.host   = host
-        self.user   = user
-        self.passwd = passwd
         self.table  = table
+
+    def connect_to_DB(self, user, passwd):
+
+        self.user     = user
+        self.__passwd = passwd
+
+        try:
+            mycon = sql.connect(host = self.host, user = self.user,
+                                passwd = self.__passwd, db = self.dbname)
+            if mycon.is_connected():
+                self.user   = self.user
+                self.__passwd = self.__passwd
+        except:
+            pass
 
     def run_query(self, query, parameters = ()):
     
         try:
         # mycon is the conection to database
             with sql.connect(host = self.host, user = self.user,
-                                passwd = self.passwd, db = self.dbname) as mycon:
+                            passwd = self.__passwd, db = self.dbname) as mycon:
                 cursor = mycon.cursor()
                 cursor.execute(query, parameters)
                 records = cursor.fetchall() 
                 mycon.commit()
             return records
-        
+
         except:
             messagebox.showerror('Ejecucion fallida',
                 'Hubieron errores en el query. Verificar permisos del usuario')
@@ -36,3 +45,6 @@ class DB_conection:
             return 'even'
         else:
             return 'odd'
+
+if __name__ == '__main__':
+    pass

@@ -12,7 +12,7 @@ class button(tk.Button):
         # Define command
         self.config(width = 15, font = style_button, fg = self.style['foreground'],
                         bg = self.style['background'], cursor = 'hand2', 
-                        activebackground = self.style['active_bg'])
+                        activebackground = self.style['active_bg'], bd = 0)
 
         # Set location
         self.grid(row = location[0], column = location[1], pady = 10)

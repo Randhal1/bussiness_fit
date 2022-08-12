@@ -3,12 +3,14 @@ run()
 
 import tkinter as tk
 from main_features.GUI_elements.selection_menu import selection_menu
+from PIL import ImageTk, Image
+
 
 class Frame(tk.Frame):
     def __init__(self, root):
         super().__init__(root, width = 800, height = 600)
         self.root = root
-
+        self.root.config(background = '#fcfcfc')
         # Define window title and icon 
         self.root.title('Inventory: Software punto de ventas')
         self.root.iconbitmap('branx_sources/main_ico.ico')
@@ -44,7 +46,19 @@ class Frame(tk.Frame):
         }
         finance_menu = selection_menu(main_menu, 'Creditos', finance_menu_items)
 
+    def read_image(self, path, size):
+        return ImageTk.PhotoImage(Image.open(path).resize(size, Image.ANTIALIAS))
+    
+    def center_window(self, app_width, app_height):
+        x_width = self.winfo_screenwidth()
+        y_width = self.winfo_screenheight()
+        x = int((x_width - app_width)/2)
+        y = int((y_width - app_height)/2)
+
+        return self.root.geometry(f'{app_width}x{app_height}+{x}+{y}')
+
 if __name__ == '__main__':
     root  = tk.Tk()
-    frame = Frame(root) 
+    frame = Frame(root)
+    frame.center_window(300, 300)
     root.mainloop()

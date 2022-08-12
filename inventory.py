@@ -9,10 +9,11 @@ from main_features.products_connections import products_connection
 from main_features.GUI_elements.buttons import button
 from main_features.GUI_elements.labels_entries import collector
 
-def products():
+def products(name, passwd):
     # Create frame
     root = tk.Tk()
     data = products_connection()
+    data.connect_to_DB(name, passwd)
     frame = Frame(root)
     
     ## Input labels
@@ -171,4 +172,4 @@ def products():
     root.mainloop()
 
 if __name__ == '__main__':
-    products()
+    pass
