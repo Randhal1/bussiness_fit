@@ -15,6 +15,7 @@ def products(name, passwd):
     data = products_connection()
     data.connect_to_DB(name, passwd)
     frame = Frame(root)
+    frame.config(background = '#fcfcfc')
     
     ## Input labels
     code        = collector(frame, 'Código :', 1, start_here = True)
@@ -172,4 +173,4 @@ def products(name, passwd):
     root.mainloop()
 
 if __name__ == '__main__':
-    pass
+    products('comercial_auyama_boss', '8498731104+1')

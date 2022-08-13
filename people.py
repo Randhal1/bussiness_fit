@@ -9,11 +9,12 @@ from main_features.people_connections import people_connection
 from main_features.GUI_elements.buttons import button
 from main_features.GUI_elements.labels_entries import collector
 
-def people():
-    
-    root = tk.Tk()
+def people(root, user, passwd):
+
     data = people_connection()
+    data.connect_to_DB(user, passwd)
     frame = Frame(root)
+    frame.config(background = '#fcfcfc')
     
     code        = collector(frame, 'Código de cliente :', 1,
                             displace = -1, start_here = True)
@@ -174,7 +175,8 @@ def people():
     edit_button   = button(frame, 'Editar', edit_customer, 'blue_button', (11,1))
     delete_button = button(frame, 'Eliminar', delete_customer, 'black_button', (11,2))
     cancel_operation()
-    root.mainloop()
 
 if __name__ == '__main__':
-    people()
+    root = tk.Tk()
+    people(root, 'comercial_auyama_boss', '8498731104+1')
+    root.mainloop()

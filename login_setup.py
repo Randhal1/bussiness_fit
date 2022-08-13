@@ -2,13 +2,11 @@ from main_features.start_module import run
 run()
 
 import tkinter as tk
-import getpass
 from tkinter import messagebox
 from main_features.frames import Frame
 from main_features.dbconnections import DB_conection
 from main_features.GUI_elements.labels_entries import collector
 from main_features.GUI_elements.buttons import button
-from main_features import *
 from inventory import products
 
 def login_screen():
