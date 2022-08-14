@@ -3,7 +3,7 @@ import tkinter as tk
 # This class define the label, value and input of elements
 class collector:
     def __init__(self, main_frame, field_name, location, 
-                    displace = 0, start_here = False, passwd = False):
+                    displace = 0, start_here = False):
 
         # Style of text
         style_labels = ('verdana', 12, 'bold')

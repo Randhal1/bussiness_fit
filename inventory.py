@@ -9,9 +9,8 @@ from main_features.products_connections import products_connection
 from main_features.GUI_elements.buttons import button
 from main_features.GUI_elements.labels_entries import collector
 
-def products(name, passwd):
+def products(root, name, passwd):
     # Create frame
-    root = tk.Tk()
     data = products_connection()
     data.connect_to_DB(name, passwd)
     frame = Frame(root)
@@ -118,16 +117,15 @@ def products(name, passwd):
             cancel_button.button_color('purple_button')
 
             code.value.set(
-                inventory_list.item(inventory_list.selection())['values'][0])
+                inventory_list.item(inventory_list.selection(), option = 'values')[0])
             description.value.set(
-                inventory_list.item(inventory_list.selection())['values'][1])
+                inventory_list.item(inventory_list.selection(), option = 'values')[1])
             cost.value.set(
-                inventory_list.item(inventory_list.selection())['values'][2])
+                inventory_list.item(inventory_list.selection(), option = 'values')[2])
             price.value.set(
-                inventory_list.item(inventory_list.selection())['values'][3])
+                inventory_list.item(inventory_list.selection(), option = 'values')[3])
             quantity.value.set(
-                inventory_list.item(inventory_list.selection())['values'][4])
-        
+                inventory_list.item(inventory_list.selection(), option = 'values')[4])
         except:
             messagebox.showwarning('Error de selección', 
                     'Por favor seleccione un registro y luego presione el boton editar.')
@@ -137,26 +135,15 @@ def products(name, passwd):
     def delete_item():
 
         try:
-            code.value.set(
-                inventory_list.item(inventory_list.selection())['values'][0])
-            description.value.set(
-                inventory_list.item(inventory_list.selection())['values'][1])
-            cost.value.set(
-                inventory_list.item(inventory_list.selection())['values'][2])
-            price.value.set(
-                inventory_list.item(inventory_list.selection())['values'][3])
-            quantity.value.set(
-                inventory_list.item(inventory_list.selection())['values'][4])
-
-            element      = inventory_list.item(inventory_list.selection())['values'][0]
-            element_desc = inventory_list.item(inventory_list.selection())['values'][1] 
+            element   = inventory_list.item(inventory_list.focus(), option = 'values')[0]
+            elmnt_dsc = inventory_list.item(inventory_list.focus(), option = 'values')[1] 
             
             data.delete_product(element) 
             data.get_products(inventory_list)    
             clean() 
 
             messagebox.showwarning('Alerta de borrado.', 
-                f'El producto {element} "{element_desc}" ha sido borrado de la lista.')
+                f'El producto >>>{element}<<< \n "{elmnt_dsc}" \n ha sido borrado del registro.')
 
         except tk._tkinter.TclError:
             messagebox.showwarning('Alerta de borrado.', 
@@ -170,7 +157,9 @@ def products(name, passwd):
     delete_button = button(frame, 'Eliminar', delete_item, 'black_button', (8,1))
     
     cancel_operation()
-    root.mainloop()
+    
 
 if __name__ == '__main__':
-    products('comercial_auyama_boss', '8498731104+1')
+    root = tk.Tk()
+    products(root, 'comercial_auyama_boss', '8498731104+1')
+    root.mainloop()

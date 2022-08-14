@@ -120,17 +120,17 @@ def people(root, user, passwd):
             cancel_button.button_color('purple_button')
 
             code.value.set(
-                people_list.item(people_list.selection())['values'][0])
+                people_list.item(people_list.selection(), option = 'values')[0])
             name.value.set(
-                people_list.item(people_list.selection())['values'][1])
+                people_list.item(people_list.selection(), option = 'values')[1])
             phone.value.set(
-                people_list.item(people_list.selection())['values'][2])
+                people_list.item(people_list.selection(), option = 'values')[2])
             debt.value.set(
-                people_list.item(people_list.selection())['values'][3])
+                people_list.item(people_list.selection(), option = 'values')[3])
             direction.value.set(
-                people_list.item(people_list.selection())['values'][4])
+                people_list.item(people_list.selection(), option = 'values')[4])
             email.value.set(
-                people_list.item(people_list.selection())['values'][5])
+                people_list.item(people_list.selection(), option = 'values')[5])
         
         except:
             messagebox.showwarning('Error de selección', 
@@ -141,28 +141,15 @@ def people(root, user, passwd):
     def delete_customer():
 
         try:
-            code.value.set(
-                people_list.item(people_list.selection())['values'][0])
-            name.value.set(
-                people_list.item(people_list.selection())['values'][1])
-            phone.value.set(
-                people_list.item(people_list.selection())['values'][2])
-            debt.value.set(
-                people_list.item(people_list.selection())['values'][3])
-            direction.value.set(
-                people_list.item(people_list.selection())['values'][4])
-            email.value.set(
-                people_list.item(people_list.selection())['values'][5])
-
-            customer      = people_list.item(people_list.selection())['values'][0]
-            customer_name = people_list.item(people_list.selection())['values'][1] 
+            customer      = people_list.item(people_list.focus(), option = 'values')[0]
+            customer_name = people_list.item(people_list.focus(), option = 'values')[1] 
             
             data.delete_customer(customer) 
             data.get_people(people_list)    
             clean() 
 
             messagebox.showwarning('Alerta de borrado.', 
-                f'El cliente {customer} "{customer_name}" ha sido borrado de la lista.')
+                f'El cliente >>>{customer}<<<\n"{customer_name}" \n ha sido eliminado de lod registros.')
 
         except tk._tkinter.TclError:
             messagebox.showwarning('Alerta de borrado.', 
@@ -170,7 +157,8 @@ def people(root, user, passwd):
             
 
     # Buttons
-    save_button   = button(frame, 'Crear cliente', create_new_customer, 'green_button', (9, 1))
+    save_button   = button(frame, 'Crear cliente', 
+                            create_new_customer, 'green_button', (9, 1))
     cancel_button = button(frame, 'Cancelar', cancel_operation, 'red_button', (9, 2))
     edit_button   = button(frame, 'Editar', edit_customer, 'blue_button', (11,1))
     delete_button = button(frame, 'Eliminar', delete_customer, 'black_button', (11,2))

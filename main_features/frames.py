@@ -2,6 +2,7 @@ from start_module import run
 run()
 
 import tkinter as tk
+from tkinter import HORIZONTAL, ttk
 from main_features.GUI_elements.selection_menu import selection_menu
 from PIL import ImageTk, Image
 
@@ -15,7 +16,7 @@ class Frame(tk.Frame):
         self.root.title('Inventory: Software punto de ventas')
         self.root.iconbitmap('branx_sources/main_ico.ico')
         
-        self.menus()
+        #self.menus()
         self.pack()
         
     def menus(self): 
@@ -48,7 +49,21 @@ class Frame(tk.Frame):
 
     def read_image(self, path, size):
         return ImageTk.PhotoImage(Image.open(path).resize(size, Image.ANTIALIAS))
-    
+
+    def image_frame(self, loc, source, bckg, size = (200, 200)):
+        logo_image = self.read_image(source, size)
+        logo       = tk.Label(self, image = logo_image, bg = bckg)
+        logo.image = logo_image
+
+        logo.grid(row = loc[0], column = loc[1])
+
+    def row_space(self, distance, column, bckg):
+        for row in distance:
+            tk.Label(self, text = '', bg = bckg).grid(row = row, column = column)
+
+    def single_row_space(self, row, column, bckg):
+        tk.Label(self, text ='', bg = bckg).grid(row = row, column = column)
+
     def center_window(self, app_width, app_height):
         x_width = self.winfo_screenwidth()
         y_width = self.winfo_screenheight()
