@@ -2,7 +2,6 @@ from start_module import run
 run()
 
 import tkinter as tk
-from tkinter import HORIZONTAL, ttk
 from main_features.GUI_elements.selection_menu import selection_menu
 from PIL import ImageTk, Image
 

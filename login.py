@@ -65,4 +65,3 @@ if __name__ == '__main__':
     root = tk.Tk()
     login_screen(root)
     root.mainloop()
-    #products('comercial_auyama_boss', '8498731104+1')

@@ -51,6 +51,4 @@ def main(root, user, passwd):
     chkin_button.grid(padx = 40)
 
 if __name__ == '__main__':
-    root = tk.Tk()
-    main(root, 'comercial_auyama_boss', '8498731104+1')
-    root.mainloop()
+    pass

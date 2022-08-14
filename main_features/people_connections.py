@@ -90,5 +90,4 @@ class people_connection(DB_conection):
 
 
 if __name__ == '__main__':
-    personal = people_connection()
-    personal.edit_customer('214383', 'sabri', '', 45, '', 'sabrig')
+    pass

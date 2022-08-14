@@ -56,4 +56,4 @@ def color(color_name):
     return color_style
 
 if __name__ == '__main__':
-    print(color('blue_button'))
+    pass
