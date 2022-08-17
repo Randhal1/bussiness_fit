@@ -9,7 +9,9 @@ from main_features.frames import Frame
 from main_features.GUI_elements.buttons import button
 
 def main(root, user, passwd):
-    
+
+    __passwd = passwd
+
     frame_color = '#C30015'
     frame       = Frame(root)
     frame.config(background = frame_color)
@@ -20,11 +22,11 @@ def main(root, user, passwd):
     # Buttons functions
     def inventory_callback():
         inv_frame = tk.Toplevel(root)
-        products(inv_frame, user, passwd)
+        products(inv_frame, user, __passwd)
 
     def people_callback():
         inv_frame = tk.Toplevel(root)
-        people(inv_frame, user, passwd)
+        people(inv_frame, user, __passwd)
 
     def invoice_callback():
         pass

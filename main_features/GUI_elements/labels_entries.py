@@ -21,7 +21,7 @@ class collector:
         self.field_entry = tk.Entry(main_frame, textvariable = self.value)
         if start_here:
             self.field_entry.focus()
-        self.field_entry.config(width = 50, font = style_entry, background = '#F3F3F3')
+        self.field_entry.config(width = 50, font = style_entry, background = '#D4E6F1')
         self.field_entry.grid(row = location, column = 2 + displace, 
                                 padx = 10, pady = 5, columnspan = 2)
 

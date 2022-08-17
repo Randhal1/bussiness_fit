@@ -72,6 +72,22 @@ class products_connection(DB_conection):
             self.code)
         self.run_query(query)
 
+    def sell_product(self, code, qty):
+        self.code = code
+        self.qty  = qty
+
+        query = f'''
+        UPDATE {self.table}
+        SET 
+            Cantidad = Cantidad - "%s"
+        WHERE 
+            Codigo = "%s"
+        '''%(
+            self.qty, 
+            self.code)
+
+        self.run_query(query)
+
     def delete_product(self, code):
 
         self.code = code

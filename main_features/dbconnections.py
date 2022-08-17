@@ -26,19 +26,23 @@ class DB_conection:
 
     def run_query(self, query, parameters = ()):
     
-        try:
+        # Theres fails when run the lines try and axcept:
+        # Must run well but need more study
+        # It was left as is due to time pressures 16*08*2022  20:25
+         
+        #try:
         # mycon is the conection to database
-            with sql.connect(host = self.host, user = self.user,
-                            passwd = self.__passwd, db = self.dbname) as mycon:
-                cursor = mycon.cursor()
-                cursor.execute(query, parameters)
-                records = cursor.fetchall() 
-                mycon.commit()
-            return records
+        with sql.connect(host = self.host, user = self.user,
+                        passwd = self.__passwd, db = self.dbname) as mycon:
+            cursor = mycon.cursor()
+            cursor.execute(query, parameters)
+            records = cursor.fetchall() 
+            mycon.commit()
+        return records
 
-        except:
-            messagebox.showerror('Ejecucion fallida',
-                'Hubieron errores en el query. Verificar permisos del usuario')
+        #except:
+        #    messagebox.showerror('Ejecucion fallida',
+        #        'Hubieron errores en el query. Verificar permisos del usuario')
     
     def row_parity(self, row_number):
         if row_number % 2 == 0:
