@@ -5,6 +5,7 @@ run
 import tkinter as tk
 from inventory import products
 from people import people
+from sales import invoices
 from main_features.frames import Frame
 from main_features.GUI_elements.buttons import button
 
@@ -25,11 +26,12 @@ def main(root, user, passwd):
         products(inv_frame, user, __passwd)
 
     def people_callback():
-        inv_frame = tk.Toplevel(root)
-        people(inv_frame, user, __passwd)
+        ppl_frame = tk.Toplevel(root)
+        people(ppl_frame, user, __passwd)
 
     def invoice_callback():
-        pass
+        ivc_frame = tk.Toplevel(root)
+        invoices(ivc_frame, user, __passwd)        
 
     # Inventory
     frame.single_row_space(0, 0,frame_color) 

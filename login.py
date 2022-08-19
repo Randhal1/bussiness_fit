@@ -61,6 +61,8 @@ def login_screen(root):
     
     login_btn = button(frame_data, 'Iniciar sesión', login, 'purple_button', (5, 2))
 
+    login_root.bind('<Return>', lambda event: login())
+
 if __name__ == '__main__':
     root = tk.Tk()
     login_screen(root)
