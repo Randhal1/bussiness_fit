@@ -19,7 +19,7 @@ class sales(DB_conection):
     
     def find_customer(self, customer_code):
         query = f'''
-            select nombre, telefono, deuda 
+            select nombre, deuda , telefono
             from {self.data_customer.table} 
             where codigo_cliente = {customer_code} 
         '''
