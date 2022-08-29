@@ -72,7 +72,4 @@ class Frame(tk.Frame):
         return self.root.geometry(f'{app_width}x{app_height}+{x}+{y}')
 
 if __name__ == '__main__':
-    root  = tk.Tk()
-    frame = Frame(root)
-    frame.center_window(300, 300)
-    root.mainloop()
+    pass

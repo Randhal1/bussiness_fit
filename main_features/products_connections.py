@@ -103,6 +103,5 @@ class products_connection(DB_conection):
 
         self.run_query(query)
 
-
 if __name__ == '__main__':
     pass

@@ -97,6 +97,4 @@ def print_invoice(seller,ccode, customer, item_list, total, total_itbis, evento)
     p.cut()
 
 if __name__ == '__main__':
-    print_invoice('Randhal', '40211821331', 'Moreno', ['','Descripcion', 'Precio', 'Cantidad', 'Subtotal'], '451', '11', '21806e2a1d9211edbf75a8a7956a446a')
-    #pass
     pass

@@ -77,13 +77,4 @@ class sales(DB_conection):
 
 
 if __name__ == '__main__':
-    #pass
-    
-    # Test lines for this module, aproved tests 16*08*2022 20:26 
-
-    sale = sales('comercial_auyama_boss', '8498731104+1aA')
-    sale.connect_to_DB('comercial_auyama_boss', '8498731104+1aA')
-    #sale.check_in('01200657243', 3514, 'Efectivo', 'Aqui va la lista de los items comprados')
-    #sale.update_inventory('033613021650', '-3', '30')
-    print(sale.find_product('00'))
-    #print(sale.find_customer('01200657243'))
+    pass

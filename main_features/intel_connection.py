@@ -34,6 +34,4 @@ class intelligence(DB_conection):
         self.run_query(query)
 
 if __name__ == '__main__':
-    intel = intelligence('21806e2a1d9211edbf75a8a7956a446a')
-    intel.connect_to_DB('comercial_auyama_boss', '8498731104+1')
-    intel.add_intel('01200657243', '033613021650', 45, 115)
+    pass

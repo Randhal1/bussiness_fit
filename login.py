@@ -64,6 +64,4 @@ def login_screen(root):
     login_root.bind('<Return>', lambda event: login())
 
 if __name__ == '__main__':
-    root = tk.Tk()
-    login_screen(root)
-    root.mainloop()
+    pass

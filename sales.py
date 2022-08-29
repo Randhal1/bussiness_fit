@@ -212,6 +212,4 @@ def invoices(root, name, passwd):
 
 
 if __name__ == '__main__':
-    root  = tk.Tk()
-    frame = invoices(root, 'comercial_auyama_boss', '8498731104+1aA')
-    root.mainloop()
+    pass

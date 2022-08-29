@@ -165,6 +165,4 @@ def people(root, user, passwd):
     cancel_operation()
 
 if __name__ == '__main__':
-    root  = tk.Tk()
-    frame = people(root, 'comercial_auyama_boss', '8498731104+1aA')
-    root.mainloop()
+    pass
