@@ -25,14 +25,14 @@ def people(root, user, passwd):
     email       = collector(frame, 'Correo electrónico :', 6, displace = -1)
 
     headers_product = ['Código', 'Nombre', 'Telefono', 'Deuda', 'Dirección', 'e-mail']
-    people_list = Table(frame, headers_product, 10, 9, 8, 'green_table', rows_qty = 10)
+    people_list = Table(frame, headers_product, 10, 9, 8, 'green_table', rows_qty = 15)
 
     people_list.column(headers_product[0], width = 150, anchor = tk.CENTER)
     people_list.column(headers_product[1], width = 200)
     people_list.column(headers_product[2], width = 150, anchor = tk.CENTER)
-    people_list.column(headers_product[3], width = 150, anchor = tk.E)
-    people_list.column(headers_product[4], width = 300)
-    people_list.column(headers_product[5], width = 280)
+    people_list.column(headers_product[3], width = 100, anchor = tk.E)
+    people_list.column(headers_product[4], width = 150)
+    people_list.column(headers_product[5], width = 200)
 
     data.get_people(people_list)
 
@@ -70,7 +70,7 @@ def people(root, user, passwd):
                             str(code.value.get()),
                             str(name.value.get()),
                             str(phone.value.get()),
-                            float(debt.value.get()),
+                            "{:.2f}".format(float(debt.value.get())),
                             str(direction.value.get()),
                             str(email.value.get())
                             )
@@ -165,4 +165,6 @@ def people(root, user, passwd):
     cancel_operation()
 
 if __name__ == '__main__':
-    pass
+    root  = tk.Tk()
+    frame = people(root, 'comercial_auyama_boss', '8498731104+1aA')
+    root.mainloop()

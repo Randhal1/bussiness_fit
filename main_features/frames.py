@@ -13,7 +13,7 @@ class Frame(tk.Frame):
         self.root.config(background = '#fcfcfc')
         # Define window title and icon 
         self.root.title('Inventory: Software punto de ventas')
-        self.root.iconbitmap('branx_sources/main_ico.ico')
+        #self.root.iconbitmap('branx_sources/main_ico.ico')
         
         #self.menus()
         self.pack()

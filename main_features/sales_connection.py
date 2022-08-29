@@ -1,4 +1,3 @@
-import uuid
 from datetime import datetime
 from dbconnections import DB_conection
 from intel_connection import intelligence
@@ -28,14 +27,14 @@ class sales(DB_conection):
 
     def find_product(self, product_code):
         query = f'''
-            select Descripcion, Precio, Cantidad
+            select Descripcion, Precio, Cantidad, ITBIS
             from {self.data_product.table} 
             where codigo = {product_code} 
         '''
         return self.data_product.run_query(query)[0]
 
-    def check_in(self, customer_code, value, payment, items):
-        self.id       = uuid.uuid1().hex
+    def check_in(self, id_venta, customer_code, value, payment, items):
+        self.id       = id_venta
         self.cus_code = customer_code
         self.value    = value
         self.payment  = payment
@@ -78,13 +77,13 @@ class sales(DB_conection):
 
 
 if __name__ == '__main__':
-    pass
+    #pass
     
     # Test lines for this module, aproved tests 16*08*2022 20:26 
 
-    #sale = sales(user, passwd)
-    #sale.connect_to_DB(user, passwd)
+    sale = sales('comercial_auyama_boss', '8498731104+1aA')
+    sale.connect_to_DB('comercial_auyama_boss', '8498731104+1aA')
     #sale.check_in('01200657243', 3514, 'Efectivo', 'Aqui va la lista de los items comprados')
     #sale.update_inventory('033613021650', '-3', '30')
-    #print(sale.find_product('033613021650'))
+    print(sale.find_product('00'))
     #print(sale.find_customer('01200657243'))

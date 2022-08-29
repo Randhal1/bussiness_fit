@@ -21,17 +21,19 @@ def products(root, name, passwd):
     description = collector(frame, 'Descipción :', 2)
     cost        = collector(frame, 'Costo :', 3)
     price       = collector(frame, 'Precio :', 4)
-    quantity    = collector(frame, 'Cantidad :', 5)
+    itbis       = collector(frame, 'ITBIS :', 5)
+    quantity    = collector(frame, 'Cantidad :', 6)
 
     # The list with the products
-    headers_product = ['Código', 'Descripción', 'Costo', 'Precio', 'Cantidad']
-    inventory_list = Table(frame, headers_product, 7, 4, 3, 'blue_table')
+    headers_product = ['Código', 'Descripción', 'Costo', 'Precio', 'ITBIS', 'Cantidad']
+    inventory_list = Table(frame, headers_product, 8, 4, 3, 'blue_table')
 
-    inventory_list.column(headers_product[0], width = 200)
-    inventory_list.column(headers_product[1], width = 500)
+    inventory_list.column(headers_product[0], width = 150)
+    inventory_list.column(headers_product[1], width = 400)
     inventory_list.column(headers_product[2], width = 100, anchor = tk.E)
     inventory_list.column(headers_product[3], width = 100, anchor = tk.E)
     inventory_list.column(headers_product[4], width = 100, anchor = tk.E)
+    inventory_list.column(headers_product[5], width = 100, anchor = tk.E)
 
     data.get_products(inventory_list)
 
@@ -41,6 +43,7 @@ def products(root, name, passwd):
         description.value.set('')
         cost.value.set('')
         price.value.set('')
+        itbis.value.set('')
         quantity.value.set('')
 
     def labels_state(state):
@@ -55,6 +58,7 @@ def products(root, name, passwd):
         description.field_entry.config(state = var)
         cost.field_entry.config(state = var)
         price.field_entry.config(state = var)
+        itbis.field_entry.config(state = var)
         quantity.field_entry.config(state = var)
         cancel_button.config(state = var)
 
@@ -70,6 +74,7 @@ def products(root, name, passwd):
                             str(description.value.get()), 
                             float(eval(cost.value.get())), 
                             float(eval(price.value.get())), 
+                            float(eval(itbis.value.get())), 
                             float(eval(quantity.value.get()))
                             )
 
@@ -87,7 +92,8 @@ def products(root, name, passwd):
                             str(code.value.get()), 
                             str(description.value.get()), 
                             float(eval(cost.value.get())), 
-                            float(eval(price.value.get())), 
+                            float(eval(price.value.get())),
+                            float(eval(itbis.value.get())), 
                             float(eval(quantity.value.get()))
                             )
 
@@ -124,8 +130,10 @@ def products(root, name, passwd):
                 inventory_list.item(inventory_list.selection(), option = 'values')[2])
             price.value.set(
                 inventory_list.item(inventory_list.selection(), option = 'values')[3])
-            quantity.value.set(
+            itbis.value.set(
                 inventory_list.item(inventory_list.selection(), option = 'values')[4])
+            quantity.value.set(
+                inventory_list.item(inventory_list.selection(), option = 'values')[5])
         except:
             messagebox.showwarning('Error de selección', 
                     'Por favor seleccione un registro y luego presione el boton editar.')
@@ -151,13 +159,15 @@ def products(root, name, passwd):
             
 
     # Buttons
-    save_button   = button(frame, 'Crear', create_new_product, 'green_button', (6, 2))
-    cancel_button = button(frame, 'Cancelar', cancel_operation, 'red_button', (6, 3))
-    edit_button   = button(frame, 'Editar', edit_item, 'blue_button', (8,0))
-    delete_button = button(frame, 'Eliminar', delete_item, 'black_button', (8,1))
+    save_button   = button(frame, 'Crear', create_new_product, 'green_button', (7, 2))
+    cancel_button = button(frame, 'Cancelar', cancel_operation, 'red_button', (7, 3))
+    edit_button   = button(frame, 'Editar', edit_item, 'blue_button', (9,0))
+    delete_button = button(frame, 'Eliminar', delete_item, 'black_button', (9,1))
     
     cancel_operation()
     
 
 if __name__ == '__main__':
-    pass
+    root = tk.Tk()
+    products(root, 'comercial_auyama_boss', '8498731104+1aA')
+    root.mainloop()

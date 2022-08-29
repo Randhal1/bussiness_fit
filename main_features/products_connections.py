@@ -23,34 +23,38 @@ class products_connection(DB_conection):
             code = row[0] 
             desc = row[1]
             cost = "{:.2f}".format(row[2]) 
-            prce = "{:.2f}".format(row[3]) 
+            prce = "{:.2f}".format(row[3])
+            itbis = "{:.2f}".format(row[5])
             qnty = "{:.2f}".format(row[4]) 
-            ans  = (code, desc, cost, prce, qnty)
+            ans  = (code, desc, cost, prce, itbis, qnty)
             table.insert('', tk.END, values = ans, tag = self.row_parity(parity))
 
-    def add_product(self, code, description, cost, price, qty):
+    def add_product(self, code, description, cost, price, itbis, qty):
         self.code        = code
         self.description = description
         self.cost        = cost
         self.price       = price
+        self.itbis       = itbis
         self.qty         = qty
 
         query = f'''
-        INSERT INTO {self.table} (Codigo, Descripcion, Costo, Precio, Cantidad)
+        INSERT INTO {self.table} (Codigo, Descripcion, Costo, Precio, Cantidad, ITBIS)
         VALUES
             ('{self.code}', 
             '{self.description}', 
             {self.cost},
             {self.price}, 
-            {self.qty})
+            {self.qty}, 
+            {self.itbis})
         '''
         self.run_query(query)
 
-    def edit_product(self, code, description, cost, price, qty):
+    def edit_product(self, code, description, cost, price, itbis, qty):
         self.code        = code
         self.description = description
         self.cost        = cost
         self.price       = price
+        self.itbis       = itbis
         self.qty         = qty
 
         # The update statement its different for security propourses, consider to update
@@ -61,14 +65,16 @@ class products_connection(DB_conection):
             Descripcion = "%s", 
             Costo = "%s", 
             Precio = "%s",
-            Cantidad = "%s"
+            Cantidad = "%s",
+            ITBIS = "%s"
         WHERE 
             Codigo = "%s"
         '''%(
             self.description,
             self.cost,
             self.price,
-            self.qty, 
+            self.qty,
+            self.itbis, 
             self.code)
         self.run_query(query)
 
