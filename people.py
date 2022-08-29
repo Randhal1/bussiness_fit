@@ -89,7 +89,7 @@ def people(root, user, passwd):
                             str(code.value.get()),
                             str(name.value.get()),
                             str(phone.value.get()),
-                            float(debt.value.get()),
+                            float(eval(debt.value.get())),
                             str(direction.value.get()),
                             str(email.value.get())
                             )
